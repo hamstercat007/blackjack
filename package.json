@@ -1,0 +1,12 @@
+{
+  "name": "segs-2022-tech-test-candidate-pack",
+  "version": "1.0.0",
+  "description": "BBC Blackjack Solution",
+  "main": "bin/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
