@@ -1,19 +1,11 @@
 export default class Deck {
   constructor() {
-  this.cards =   ["A", "A", "A", "A", 
-                2, 2, 2, 2, 
-                3, 3, 3, 3,
-                4, 4, 4, 4, 
-                5, 5, 5, 5,
-                6, 6, 6, 6, 
-                7, 7, 7, 7, 
-                8, 8, 8, 8, 
-                9, 9, 9, 9, 
-                "J", "J", "J", "J", 
-                "Q", "Q", "Q", "Q", 
-                "K", "K", "K", "K"].sort(() => Math.random() - 0.5)
+    const suit = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"];
+    this.cards = [...suit, ...suit, ...suit, ...suit].sort(
+      () => Math.random() - 0.5
+    );
   }
   dealCard() {
-    return this.cards.pop()
+    return this.cards.pop();
   }
 }
