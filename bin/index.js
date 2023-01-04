@@ -1,25 +1,37 @@
 #!/usr/bin/env node
 
 import Deck from "../src/deck.js";
-import Player from "../src/player.js"
+import Player from "../src/player.js";
+import promptSync from "prompt-sync";
 
-/*create a class constructor with a deck of cards with 52 cards
-Number cards are worth their face value (2-10)  
-Jacks, queens, and kings are worth 10 each 
-Aces are worth either 1 or 11 (player chooses) 
+const deck = new Deck();
+const player = new Player();
+const prompt = promptSync({ sigint: true });
 
-create an empty array for the player's hand, 
-deal the cards twice
-evaluate the numbers, using a sum method
+player.hand.push(deck.dealCard(), deck.dealCard());
+console.log("player's hand: ", player.hand.sort());
 
-If there's a picture card, then the Ace is 11, making 21. 1 picture card + Ace, then Ace is 11. 
-If king, a queen, and an ace  is 1. 2 picture cards + Ace, then Ace is 1.
-Given that I have a nine, an ace, and another ace, this will be 21.  
-*/
+player.updateTotal()
 
-const newDeck = new Deck();
-const newPlayer = new Player()
-newPlayer.hand.push(newDeck.dealCard(), newDeck.dealCard())
-console.log("player's hand: ", newPlayer.hand.sort())
-newPlayer.summedValues()
-console.log("What would you like to do? Hit or stand?")
+while (player.total < 21) {
+  let answer = prompt("What would you like to do? Hit or stand?  ");
+  if (answer.toLowerCase() === "hit") {
+    player.hand.push(deck.dealCard());
+    console.log("player's hand: ", player.hand.sort());
+    player.updateTotal()
+    console.log(player.total);
+  } else if (answer.toLowerCase() === "stand") {
+    console.log("I choose to stand");
+    console.log(player.total);
+    break;
+  } else {
+    console.log("I didn't recognise that input, please enter hit or stand");
+  }
+}
+
+if (player.total === 21) {
+  console.log("You've hit the jackpot of 21 - you are a winner");
+}
+if (player.total > 21) {
+  console.log("Game over, you've exceeded 21");
+}
